@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Subscription, timer, BehaviorSubject, asyncScheduler, fromEvent } from 'rxjs';
-import { buffer, filter, throttleTime, debounceTime, map, delay } from 'rxjs/operators';
+import { Subscription, timer, BehaviorSubject, fromEvent } from 'rxjs';
+import { buffer, filter, debounceTime, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-component-watch',

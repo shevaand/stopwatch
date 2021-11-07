@@ -1,0 +1,18 @@
+<div class="timer-container">
+    <div class="timer-component">
+        <section class="timer-counter-label">
+            <div class="timer">  {{displayTimer}} </div>
+        </section>
+        <section class="timer-button-container">
+            <button (click)="toggleTimer()">
+                {{ startText }}
+            </button>
+            <button (click)="waitTimer()">
+                {{ waitText }}
+            </button>
+            <button (click)="resetTimer()">
+                {{ resetText }}
+            </button>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+.timer-container {
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    align-content: center; 
+    justify-content: center; 
+    overflow: auto;   
+}
+
+.timer-component {
+    border: 5px rgb(100, 100, 100) solid;
+
+}
+
+.timer {
+    text-align: center;
+    font-size: 2.5rem;
+    letter-spacing: -1px;
+    margin: 50px 0;
+    
+    border-bottom: 3px rgb(138, 138, 138) solid ;
+}
+
+.timer-button-container {
+    text-align: center;
+}
+
+.timer-button-container button {
+    font-size: 2em;
+    margin: 0 3px 0 15px;
+    border-radius: 20px;
+}

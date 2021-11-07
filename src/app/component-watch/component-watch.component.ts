@@ -1,5 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Subscription, timer, BehaviorSubject } from 'rxjs';
+import { Subscription, timer, BehaviorSubject, asyncScheduler, fromEvent } from 'rxjs';
+import { buffer, filter, throttleTime, debounceTime, map, delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-component-watch',
@@ -12,7 +13,6 @@ export class ComponentWatchComponent implements OnDestroy{
   private subscriptions: Subscription = new Subscription();
   private isRunning: boolean = false;
   private time: BehaviorSubject<number> = new BehaviorSubject(0);
-  private clickTimer: any = null;
 
   public displayTimer: string = '00:00';
   public startText = 'Start';
@@ -51,18 +51,22 @@ export class ComponentWatchComponent implements OnDestroy{
   waitTimer() {
     this.dbClick();
   }
-
+  
   dbClick() {
-    if(this.clickTimer == null){
-      this.clickTimer = setTimeout( () => {
-        this.clickTimer = null;
-      }, 500)
-    } else {
-      clearTimeout(this.clickTimer);
-      this.clickTimer = null;
-      this.stopTimer();
+      const clickStream = fromEvent(document, 'click');
+      const dly = 500;
+
+      const multiClickStream = clickStream.pipe(
+          buffer(clickStream.pipe(debounceTime(dly))),
+          map(list => list.length),
+          filter(x => x == 2)
+      );
+
+      multiClickStream.subscribe((numclicks) => {
+        this.stopTimer();
+      });       
     }
-  }
+  
 
   resetTimer() {
     this.time.next(0);
